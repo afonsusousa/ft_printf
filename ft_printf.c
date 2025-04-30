@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/01 00:23:36 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/01 00:32:50 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,13 @@ int    ft_putaddress(unsigned long int n)
     return (count += ft_putchar((L_STR[n % 16])));
 }
 
+int     ft_address_wrapper(void *p)
+{
+    if (!p)
+        return (ft_putstr("(nil)"));
+    return (ft_putstr("0x") + ft_putaddress((unsigned long int) p));
+}
+
 int    ft_putspecifier(char c, va_list args)
 {
     int count;
@@ -94,8 +101,7 @@ int    ft_putspecifier(char c, va_list args)
     if(c == 's')
         count  += ft_putstr(va_arg(args, char *));
     if(c == 'p')
-        count  += (ft_putstr("0x")
-        + ft_putaddress((long unsigned int) va_arg(args, void *)));
+        count  += ft_address_wrapper(va_arg(args, void *));
     if(c == 'd')
         count  += ft_putnbr(va_arg(args, int));
     if(c == 'i')
@@ -131,9 +137,9 @@ int ft_printf(const char *format, ...)
     va_end(args);
     return (count);
 }
- #include <stdio.h>
- int main()
- {
-   int n = INT_MAX;
-   printf("%d\n", printf("%p\n", 0));
- }
+//  #include <stdio.h>
+//  int main()
+//  {
+//    int n = INT_MAX;
+//    printf("%d\n", printf("%p\n", 0));
+//  }
