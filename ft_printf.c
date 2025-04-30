@@ -6,14 +6,14 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/04/30 23:47:32 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/01 00:07:43 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include <unistd.h>
 #include <stdarg.h>
 #include <limits.h>
+#include "ft_printf.h"
 
 #define UPPERCASE 1
 #define LOWERCASE 0
@@ -50,7 +50,7 @@ int    ft_putnbr(int   n)
         count += ft_putchar('-');
     }
     if(nb > 9)
-        count += ft_putunbr(nb / 10);
+        count += ft_putnbr(nb / 10);
     return (count += ft_putchar(nb % 10 + '0'));
 }
 
@@ -83,6 +83,7 @@ int    ft_putaddress(unsigned long int n)
         count += (ft_putaddress(n / 16));
     return (count += ft_putchar((L_STR[n % 16])));
 }
+
 int    ft_putspecifier(char c, va_list args)
 {
     int count;
@@ -113,7 +114,7 @@ int ft_printf(const char *format, ...)
 {
     int i = 0;
     va_list args;
-    va_start(args, 1);
+    va_start(args, format);
 
     int count;
 
@@ -129,10 +130,10 @@ int ft_printf(const char *format, ...)
     va_end(args);
     return (count);
 }
- #include <stdio.h>
- int main()
- {
-   int n = INT_MAX;
-   printf("%d \n", ft_printf(" %d\n %p\n %X\n\n", n));
-   printf("%d \n", printf(" %d\n %p\n %X\n", n));
- }
+//  #include <stdio.h>
+// //  int main()
+// //  {
+// //    int n = INT_MAX;
+// //    printf("%d \n", ft_printf(" %d\n %p\n %X\n\n", n, &n, n));
+// //    printf("%d \n", printf(" %d\n %p\n %X\n", n, &n, n));
+// //  }
