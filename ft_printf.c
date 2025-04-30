@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/01 00:07:43 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/01 00:15:57 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ int    ft_putspecifier(char c, va_list args)
     if(c == 's')
         count  += ft_putstr(va_arg(args, char *));
     if(c == 'p')
-        count  += ft_putaddress((long unsigned int) va_arg(args, void *));
+        count  += (ft_putstr("0x")
+        + ft_putaddress((long unsigned int) va_arg(args, void *)));
     if(c == 'd')
         count  += ft_putnbr(va_arg(args, int));
     if(c == 'i')
