@@ -1,15 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/04/26 00:43:13 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/04/30 23:47:32 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include <unistd.h>
 #include <stdarg.h>
 #include <limits.h>
@@ -20,104 +21,118 @@
 #define U_STR "0123456789ABCDEF"
 #define L_STR "0123456789abcdef"
 
-void    ft_putchar(char c)
+int    ft_putchar(char c)
 {
-    write(1, &c, 1);
+    return (write(1, &c, 1));
 }
-void    ft_putstr(char *str)
+int    ft_putstr(char *str)
 {
+    int count;
+
+    count = 0;
     if(!str)
-        return ;
+        return (ft_putstr("(nil)"));
     while(*str)
-        ft_putchar(*str++);
+        count += ft_putchar(*str++);
+    return (count);
 }
 
-void    ft_putnbr(int   n)
+int    ft_putnbr(int   n)
 {
+    int count;
     long int nb;
 
     nb = n;
+    count = 0;
     if(nb < 0)
     {
-        ft_putchar('-');
-        nb *= -1;
+        nb = -nb;
+        count += ft_putchar('-');
     }
-    if(nb <= 9)
-        ft_putchar(nb % 10 + '0');
-    ft_putnbr(nb / 10);
-    ft_putnbr(nb % 10);
+    if(nb > 9)
+        count += ft_putunbr(nb / 10);
+    return (count += ft_putchar(nb % 10 + '0'));
 }
 
-void    ft_putunbr(unsigned int n)
+int    ft_putunbr(unsigned int n)
 {
-    if(n <= 9)
-        ft_putchar(n % 10 + '0');
-    ft_putnbr(n / 10);
-    ft_putnbr(n % 10);
+    int count;
+
+    count = 0;
+    if(n > 9)
+        count += ft_putunbr(n / 10);
+    return (count += ft_putchar(n % 10 + '0'));
 }
 
-void    ft_putnbr_hex(unsigned int n, int l_case)
+int    ft_putnbr_hex(unsigned int n, int l_case)
 {
-    if(n <= 16)
-        ft_putchar((l_case * U_STR[n % 16]) + (!l_case * L_STR[n % 16]));
-    else
-    {
-        ft_putnbr_hex(n / 16, l_case);
-        ft_putnbr_hex(n % 16, l_case);
-    }
+    int count;
+
+    count = 0;
+    if(n > 15)
+        count += (ft_putnbr_hex(n / 16, l_case));
+    return (count += ft_putchar((l_case * U_STR[n % 16]) + (!l_case * L_STR[n % 16])));
 }
 
-void    ft_putaddress(unsigned long int n)
+int    ft_putaddress(unsigned long int n)
 {
-    if(n <= 16)
-        ft_putchar(L_STR[n % 16]);
-    else
-    {
-        ft_putaddress(n / 16);
-        ft_putaddress(n % 16);
-    }
+    int count;
+
+    count = 0;
+    if(n > 15)
+        count += (ft_putaddress(n / 16));
+    return (count += ft_putchar((L_STR[n % 16])));
 }
-void    ft_putspecifier(char c, va_list args)
+int    ft_putspecifier(char c, va_list args)
 {
+    int count;
+
+    count = 0;
     if(c == 'c')
-        ft_putchar(va_arg(args, int));
+        count  += ft_putchar(va_arg(args, int));
     if(c == 's')
-        ft_putstr(va_arg(args, char *));
+        count  += ft_putstr(va_arg(args, char *));
     if(c == 'p')
-        ft_putaddress((long unsigned int) va_arg(args, void *));
+        count  += ft_putaddress((long unsigned int) va_arg(args, void *));
     if(c == 'd')
-        ft_putnbr(va_arg(args, int));
+        count  += ft_putnbr(va_arg(args, int));
     if(c == 'i')
-        ft_putnbr(va_arg(args, int));
+        count  += ft_putnbr(va_arg(args, int));
     if(c == 'u')
-        ft_putunbr(va_arg(args, unsigned int));
+        count  += ft_putunbr(va_arg(args, unsigned int));
     if(c == 'x')
-        ft_putnbr_hex(va_arg(args, int), LOWERCASE);
+        count  += ft_putnbr_hex(va_arg(args, int), LOWERCASE);
     if(c == 'X')
-        ft_putnbr_hex(va_arg(args, int), UPPERCASE);
+        count  += ft_putnbr_hex(va_arg(args, int), UPPERCASE);
     if(c == '%')
-        ft_putchar('%');
+        count  += ft_putchar('%');
+    return (count);
 }
 
-void ft_printf(char *format, ...)
+int ft_printf(const char *format, ...)
 {
     int i = 0;
     va_list args;
-    va_start(args, 0);
+    va_start(args, 1);
+
+    int count;
+
+    count = 0;
     while(1)
     {
         if(format[i] == '%' && format[++i])
-            ft_putspecifier(format[i++], args);
+            count += ft_putspecifier(format[i++], args);
         if(!format[i])
             break;
-        ft_putchar(format[i++]);
+        count += ft_putchar(format[i++]);
     }
     va_end(args);
+    return (count);
 }
-#include <stdio.h>
-int main()
-{
-    int n = INT_MIN;
-    printf(" %p\n ", n);
-    ft_printf(" %p\n ", n);
-}
+ #include <stdio.h>
+ int main()
+ {
+   int n = INT_MAX;
+   printf("%d \n", ft_printf(" %d\n %p\n %X\n\n", n));
+   printf("%d \n", printf(" %d\n %p\n %X\n", n));
+ }
