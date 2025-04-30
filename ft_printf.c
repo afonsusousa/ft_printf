@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/01 00:32:50 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/01 00:39:25 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,24 +97,24 @@ int    ft_putspecifier(char c, va_list args)
 
     count = 0;
     if(c == 'c')
-        count  += ft_putchar(va_arg(args, int));
+        return (ft_putchar(va_arg(args, int)));
     if(c == 's')
-        count  += ft_putstr(va_arg(args, char *));
+        return (ft_putstr(va_arg(args, char *)));
     if(c == 'p')
-        count  += ft_address_wrapper(va_arg(args, void *));
+        return (ft_address_wrapper(va_arg(args, void *)));
     if(c == 'd')
-        count  += ft_putnbr(va_arg(args, int));
+        return (ft_putnbr(va_arg(args, int)));
     if(c == 'i')
-        count  += ft_putnbr(va_arg(args, int));
+        return (ft_putnbr(va_arg(args, int)));
     if(c == 'u')
-        count  += ft_putunbr(va_arg(args, unsigned int));
+        return (ft_putunbr(va_arg(args, unsigned int)));
     if(c == 'x')
-        count  += ft_putnbr_hex(va_arg(args, int), LOWERCASE);
+        return (ft_putnbr_hex(va_arg(args, int), LOWERCASE));
     if(c == 'X')
-        count  += ft_putnbr_hex(va_arg(args, int), UPPERCASE);
+        return (ft_putnbr_hex(va_arg(args, int), UPPERCASE));
     if(c == '%')
-        count  += ft_putchar('%');
-    return (count);
+        return (ft_putchar('%'));
+    return (ft_putchar(c));
 }
 
 int ft_printf(const char *format, ...)
@@ -141,5 +141,6 @@ int ft_printf(const char *format, ...)
 //  int main()
 //  {
 //    int n = INT_MAX;
-//    printf("%d\n", printf("%p\n", 0));
+//    printf("%d\n", ft_printf(" %%%% "));
+//    printf("%d\n", printf(" %%%% "));
 //  }
