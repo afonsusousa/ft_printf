@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/01 00:15:57 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/01 00:23:36 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int    ft_putstr(char *str)
 
     count = 0;
     if(!str)
-        return (ft_putstr("(nil)"));
+        return (ft_putstr("(null)"));
     while(*str)
         count += ft_putchar(*str++);
     return (count);
@@ -131,10 +131,9 @@ int ft_printf(const char *format, ...)
     va_end(args);
     return (count);
 }
-//  #include <stdio.h>
-// //  int main()
-// //  {
-// //    int n = INT_MAX;
-// //    printf("%d \n", ft_printf(" %d\n %p\n %X\n\n", n, &n, n));
-// //    printf("%d \n", printf(" %d\n %p\n %X\n", n, &n, n));
-// //  }
+ #include <stdio.h>
+ int main()
+ {
+   int n = INT_MAX;
+   printf("%d\n", printf("%p\n", 0));
+ }
