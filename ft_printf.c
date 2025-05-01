@@ -134,10 +134,12 @@ int ft_printf(const char *format, ...)
     va_end(args);
     return (count);
 }
-//  #include <stdio.h>
-//  int main()
-//  {
-//    int n = INT_MAX;
-//    printf("%d\n", ft_printf(" %%%% "));
-//    printf("%d\n", printf(" %%%% "));
-//  }
+ #include <stdio.h>
+ int main()
+ {
+   int n = INT_MAX;
+   printf("%d\n\n", ft_printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%%", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, 
+-42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0));
+   printf("%d\n", printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%%", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, 
+-42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0));
+ }
