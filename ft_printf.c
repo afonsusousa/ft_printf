@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/01 19:22:31 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/01 19:23:52 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,17 @@ int ft_printf(const char *format, ...)
     int i = 0;
     va_list args;
     va_start(args, format);
+
     int count;
 
     count = 0;
-    while(format[i])
-    { 
-        if (format[i] != '%')
+    while(1)
+    {
+        if(format[i] == '%' && format[++i])
             count += ft_putspecifier(format[i++], args);
-        else
-            count += ft_putchar(format[i++]);
+        if(!format[i])
+            break;
+        count += ft_putchar(format[i++]);
     }
     va_end(args);
     return (count);
