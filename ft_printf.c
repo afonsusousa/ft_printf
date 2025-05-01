@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/01 00:39:25 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/01 18:23:41 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,6 @@ int     ft_address_wrapper(void *p)
 
 int    ft_putspecifier(char c, va_list args)
 {
-    int count;
-
-    count = 0;
     if(c == 'c')
         return (ft_putchar(va_arg(args, int)));
     if(c == 's')
@@ -122,17 +119,15 @@ int ft_printf(const char *format, ...)
     int i = 0;
     va_list args;
     va_start(args, format);
-
     int count;
 
     count = 0;
-    while(1)
-    {
-        if(format[i] == '%' && format[++i])
+    while(format[i])
+    { 
+        if (format[i] != '%')
+            count += ft_putchar(format[i++]);
+        else
             count += ft_putspecifier(format[i++], args);
-        if(!format[i])
-            break;
-        count += ft_putchar(format[i++]);
     }
     va_end(args);
     return (count);
