@@ -6,13 +6,13 @@
 #    By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 16:47:35 by amagno-r          #+#    #+#              #
-#    Updated: 2025/05/01 00:08:36 by amagno-r         ###   ########.fr        #
+#    Updated: 2025/05/01 20:51:24 by amagno-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS = 	ft_printf.c
+SRCS = 	ft_printf.c ft_printf_utils.c
 
 OBJS = $(SRCS:.c=.o)
 

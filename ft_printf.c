@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/01 20:49:16 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/01 20:50:59 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <limits.h>
 #include "ft_printf.h"
 
-int    ft_putspecifier(char c, va_list args)
+static int    ft_putspecifier(char c, va_list args)
 {
     if(c == 'c')
         return (ft_putchar(va_arg(args, int)));
