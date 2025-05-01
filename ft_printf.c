@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/01 19:29:10 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/01 20:49:16 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,82 +14,6 @@
 #include <stdarg.h>
 #include <limits.h>
 #include "ft_printf.h"
-
-#define UPPERCASE 1
-#define LOWERCASE 0
-
-#define U_STR "0123456789ABCDEF"
-#define L_STR "0123456789abcdef"
-
-int    ft_putchar(char c)
-{
-    return (write(1, &c, 1));
-}
-int    ft_putstr(char *str)
-{
-    int count;
-
-    count = 0;
-    if(!str)
-        return (ft_putstr("(null)"));
-    while(*str)
-        count += ft_putchar(*str++);
-    return (count);
-}
-
-int    ft_putnbr(int   n)
-{
-    int count;
-    long int nb;
-
-    nb = n;
-    count = 0;
-    if(nb < 0)
-    {
-        nb = -nb;
-        count += ft_putchar('-');
-    }
-    if(nb > 9)
-        count += ft_putnbr(nb / 10);
-    return (count += ft_putchar(nb % 10 + '0'));
-}
-
-int    ft_putunbr(unsigned int n)
-{
-    int count;
-
-    count = 0;
-    if(n > 9)
-        count += ft_putunbr(n / 10);
-    return (count += ft_putchar(n % 10 + '0'));
-}
-
-int    ft_putnbr_hex(unsigned int n, int l_case)
-{
-    int count;
-
-    count = 0;
-    if(n > 15)
-        count += (ft_putnbr_hex(n / 16, l_case));
-    return (count += ft_putchar((l_case * U_STR[n % 16]) + (!l_case * L_STR[n % 16])));
-}
-
-int    ft_putaddress(unsigned long int n)
-{
-    int count;
-
-    count = 0;
-    if(n > 15)
-        count += (ft_putaddress(n / 16));
-    return (count += ft_putchar((L_STR[n % 16])));
-}
-
-int     ft_address_wrapper(void *p)
-{
-    if (!p)
-        return (ft_putstr("(nil)"));
-    return (ft_putstr("0x") + ft_putaddress((unsigned long int) p));
-}
 
 int    ft_putspecifier(char c, va_list args)
 {

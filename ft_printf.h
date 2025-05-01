@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:35:12 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/01 00:32:44 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/01 20:49:35 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #define FT_PRINTF_H
 
 #include <stdarg.h>
+
+#define UPPERCASE 1
+#define LOWERCASE 0
+
+#define U_STR "0123456789ABCDEF"
+#define L_STR "0123456789abcdef"
 
 int    ft_putchar(char c);
 int    ft_putstr(char *str);
