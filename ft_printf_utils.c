@@ -6,11 +6,17 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 20:48:53 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/01 20:50:03 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/01 20:58:14 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <unistd.h>
+
+# define UPPERCASE 1
+# define LOWERCASE 0
+
+# define U_STR "0123456789ABCDEF"
+# define L_STR "0123456789abcdef"
 
 int    ft_putchar(char c)
 {
