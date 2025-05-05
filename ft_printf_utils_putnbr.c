@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:20:59 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/05 19:25:07 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:31:05 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ int	ft_putnbr_hex(unsigned int n, int l_case)
 	count = 0;
 	if (n > 15)
 		count += (ft_putnbr_hex(n / 16, l_case));
-	return (count += ft_putchar((l_case * U_STR[n % 16])
-                + (!l_case * L_STR[n % 16])));
+	if (l_case)
+		count += ft_putchar(U_STR[n % 16]);
+	else
+		count += ft_putchar(L_STR[n % 16]);
+	return (count);
 }

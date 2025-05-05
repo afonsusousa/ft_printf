@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 20:48:53 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/05 19:25:21 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:31:17 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ int	ft_putstr(char *str)
 		count += ft_putchar(*str++);
 	return (count);
 }
-
