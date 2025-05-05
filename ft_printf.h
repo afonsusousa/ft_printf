@@ -6,12 +6,15 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:35:12 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/05 19:09:56 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:17:16 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+
+# include <stdarg.h>
+# include <unistd.h>
 
 # define UPPERCASE 1
 # define LOWERCASE 0
@@ -19,6 +22,8 @@
 # define U_STR "0123456789ABCDEF"
 # define L_STR "0123456789abcdef"
 
+int ft_printf(const char *format, ...);
+int ft_putspecifier(char c, va_list args);
 int ft_putchar(char c);
 int ft_putstr(char *str);
 int ft_putnbr(int n);
