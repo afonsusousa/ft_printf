@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/08 22:11:41 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/08 22:13:44 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_printf(const char *formatt, ...)
 	int		i;
 	int		count;
 	va_list	args;
-	t_flags *flags = new_flags();
+	t_flags *flags;
 	char *format = (char *) formatt;
 
 	i = 0;
@@ -52,8 +52,10 @@ int	ft_printf(const char *formatt, ...)
 		if (format[i] == '%' && format[i + 1])
 		{
 			format++;
+			flags = new_flags();
 			ft_parse_spec(&format, flags);
 			count += ft_putspecifier(*format, args, flags);
+			free(flags);
 			format++;
 		}
 		else if (format[i] == '%' && !*(format + 1))
@@ -61,7 +63,6 @@ int	ft_printf(const char *formatt, ...)
 		else
 			count += ft_putchar(*format++);
 	}
-	free(flags);
 	va_end(args);
 	return (count);
 }
