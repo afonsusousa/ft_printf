@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/08 20:43:56 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/08 21:36:37 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,16 @@ int	ft_printf(const char *formatt, ...)
 #include <limits.h>
 int main()
 {
-	int  num = INT_MAX;
 	// t_flags test;
 	// char spec[10] = "-5d";
 	// ft_parse_spec(&spec, &test);
 	// (void) test;
 	// ft_putchar('[');
-	int printed = ft_printf("[% -20.11d]", num);
+	char *args = "[%-10.5c]";
+	char str = 'c';
+	int printed = ft_printf(args, str + 256);
 	// ft_putchar(']');
 	printf("%d\n", printed);
-	printed = printf("[% -20.11d]", num);
+	printed = printf(args, str + 256);
 	printf("%d\n", printed);
 }
