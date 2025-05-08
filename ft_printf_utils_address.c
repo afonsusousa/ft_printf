@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:22:15 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/05 19:24:20 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/08 18:48:44 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,22 @@ int	ft_putaddress(unsigned long int n)
 	return (count += ft_putchar((L_STR[n % 16])));
 }
 
-int	ft_address_wrapper(void *p)
+int	ft_address_wrapper(void *p, t_flags *flags)
 {
+	int count;
+
+	count = 0;
 	if (!p)
-		return (ft_putstr("(nil)"));
-	return (ft_putstr("0x") + ft_putaddress((unsigned long int) p));
+		count += ft_putstr("(nil)");
+	if(flags->left && p)
+	{
+		count += ft_putstr("0x") + ft_putaddress((unsigned long int) p);
+		count += ft_padwith(flags->width - 14, ' ');
+	}
+	else
+	{
+		count += ft_padwith(flags->width - 14, ' ');
+		count += ft_putstr("0x") + ft_putaddress((unsigned long int) p);
+	}
+	return (count);
 }
