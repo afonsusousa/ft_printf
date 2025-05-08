@@ -6,17 +6,19 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:50:13 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/07 22:09:52 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/08 21:13:26 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_hexlen(unsigned int n)
+static int ft_hexlen(unsigned int n)
 {
 	int order;
 
-	order = 0;	
+	order = 0;
+	if (!n)
+		return (1);
 	while(n != 0)
 	{
 		n /= 16;
@@ -25,47 +27,26 @@ int ft_hexlen(unsigned int n)
 	return (order);
 }
 
-int	ft_puthex(unsigned int n, int l_case)
-{
-	int	count;
-
-	count = 0;
-	if (n > 15)
-		count += (ft_puthex(n / 16, l_case));
-	if (l_case)
-		count += ft_putchar(L_STR[n % 16]);
-	else
-		count += ft_putchar(U_STR[n % 16]);
-	return (count);
-}
-
-int	ft_puthex_left(unsigned int n, t_flags *flags, int l_case)
+static int	ft_puthex_left(unsigned int n, t_flags *flags, int l_case)
 {
 	int count;
 	int len;
 
 	count = 0;
 	len = ft_hexlen(n);
-	if (flags->precision == 0 && !n)
-		return (0);
     if(flags->hash)
     {
-        len += 2;
-        count += ft_putchar('0') 
-                + ft_putchar((l_case * 'x') + (!l_case * 'X'));
+        count += ft_putchar('0') + ft_putchar((l_case * 'x') + (!l_case * 'X'));
     }
-	if(flags->precision > len)
-	{
-		count += ft_padwith(flags->precision - len, '0');
-		len = flags->precision;
-	}
-	count += ft_puthex(n, l_case);
-	if(flags->width > len)
-		count += ft_padwith(flags->width - len, ' ');
+	if(flags->precision != -1)
+		count += ft_padwith(flags->precision - len - (flags->hash * 2), '0');
+	if (!(!flags->precision && !n))
+		count += ft_puthex(n, l_case);
+	count += ft_padwith(flags->width - count, ' ');
 	return (count);
 }
 
-int ft_puthex_regular(int n, t_flags *flags, int l_case)
+static int ft_puthex_regular(int n, t_flags *flags, int l_case)
 {
 	int len;
 	int count;
@@ -84,13 +65,13 @@ int ft_puthex_regular(int n, t_flags *flags, int l_case)
     {
         count += ft_putchar('0') + ft_putchar((l_case * 'x') + (!l_case * 'X'));
     }
-	if (flags->precision > len)
-		count += ft_padwith(flags->precision - len, '0');
-	count += ft_puthex(n, l_case);
+	count += ft_padwith(flags->precision - len, '0');
+	if (!(!flags->precision && !n))
+		count += ft_puthex(n, l_case);
 	return (count);
 }
 
-int	ft_puthex_zero(unsigned int n, t_flags *flags, int l_case)
+static int	ft_puthex_zero(unsigned int n, t_flags *flags, int l_case)
 {
 	int count;
 	int len;
@@ -102,6 +83,16 @@ int	ft_puthex_zero(unsigned int n, t_flags *flags, int l_case)
 	if(flags->sign || flags->space )
 		len++;
 	count += ft_padwith(flags->width - len, '0');
-	count += ft_putnbr(n);
+	if (!(!flags->precision && !n))
+		count += ft_putnbr(n);
 	return (count);
+}
+
+int ft_puthex_wrapper(unsigned int n, t_flags *flags, int l_case)
+{
+	if(flags->left)
+		return (ft_puthex_left(n, flags, l_case));
+	if(flags->zero)
+		return (ft_puthex_zero(n, flags, l_case));
+	return (ft_puthex_regular(n, flags, l_case));
 }

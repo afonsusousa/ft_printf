@@ -6,17 +6,12 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 20:48:53 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/08 18:58:27 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:05:37 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ft_printf.h"
-
-int	ft_putchar(char c)
-{
-	return (write(1, &c, 1));
-}
 
 int	ft_strlen(char *str)
 {
@@ -30,28 +25,6 @@ int	ft_strlen(char *str)
 	return (str - start);
 }
 
-int ft_putstr(char *str)
-{
-	int count;
-
-	count = 0;
-	while(str && *str)
-		count += ft_putchar(*str++);
-	return (count);
-}
-int	ft_putnstr(char *str, int n)
-{
-	int	count;
-
-	count = 0;
-	if (!str)
-		return (0);
-	while (*str && n--)
-	{
-		count += ft_putchar(*str++);
-	}
-	return (count);
-}
 int	ft_putstr_left(char *str, t_flags *flags)
 {
 	int len;
@@ -89,4 +62,11 @@ int ft_putstr_right(char *str, t_flags *flags)
 		count += ft_putnstr("(null)", len);
 	count += ft_putnstr(str, len);
 	return (count);
+}
+
+int ft_putstr_wrapper(char *str, t_flags *flags)
+{
+	if(flags->left)
+		return (ft_putstr_left(str, flags));
+	return (ft_putstr_right(str, flags));
 }

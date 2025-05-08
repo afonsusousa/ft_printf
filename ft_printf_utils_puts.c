@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_printf_utils_putcs.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 18:53:11 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/08 19:04:13 by amagno-r         ###   ########.fr       */
+/*   Created: 2025/05/08 19:38:34 by amagno-r          #+#    #+#             */
+/*   Updated: 2025/05/08 19:39:32 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_padwith(int len, char pad)
+int ft_putstr(char *str)
 {
 	int count;
 
 	count = 0;
-	if(len <= 0)
-		return (0);
-	while(len--)
-		count += ft_putchar(pad);
+	while(str && *str)
+		count += ft_putchar(*str++);
 	return (count);
 }
-
-int ft_space_sign(int n, t_flags *flags)
+int	ft_putnstr(char *str, int n)
 {
-	if (n < 0)
-		return (ft_putchar('-'));
-	if (flags->sign)
-		return (ft_putchar('+'));
-	if (flags->space)
-		return (ft_putchar(' '));
-	return (0);
-}
+	int	count;
 
-int is_spec(char c)
-{
-    return (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' 
-            || c == 'u' || c == 'x' || c == 'X' || c == '%');
+	count = 0;
+	if (!str)
+		return (0);
+	while (*str && n--)
+	{
+		count += ft_putchar(*str++);
+	}
+	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/08 19:00:21 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:43:56 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,44 @@
 int	ft_putspecifier(char c, va_list args, t_flags *flags)
 {
 	if (c == 'c')
-		return (ft_putchar(va_arg(args, int)));
+		return (ft_putchar_wrapper(va_arg(args, int), flags));
 	if (c == 's')
-		return (ft_putstr(va_arg(args, char *)));
+		return (ft_putstr_wrapper(va_arg(args, char *), flags));
 	if (c == 'p')
 		return (ft_address_wrapper(va_arg(args, void *), flags));
 	if (c == 'd')
-		return (ft_putnbr(va_arg(args, int)));
+		return (ft_putnbr_wrapper(va_arg(args, int), flags));
 	if (c == 'i')
-		return (ft_putnbr(va_arg(args, int)));
+		return (ft_putnbr_wrapper(va_arg(args, int), flags));
 	if (c == 'u')
-		return (ft_putunbr(va_arg(args, unsigned int)));
+		return (ft_putunbr_wrapper(va_arg(args, unsigned int), flags));
 	if (c == 'x')
-		return (ft_puthex(va_arg(args, int), LOWERCASE));
+		return (ft_puthex_wrapper(va_arg(args, int), flags, LOWERCASE));
 	if (c == 'X')
-		return (ft_puthex(va_arg(args, int), UPPERCASE));
+		return (ft_puthex_wrapper(va_arg(args, int), flags, UPPERCASE));
 	if (c == '%')
 		return (ft_putchar('%'));
 	return (ft_putchar(c));
 }
 
-int	ft_printf(const char *format, ...)
+int	ft_printf(const char *formatt, ...)
 {
 	int		i;
 	int		count;
 	va_list	args;
-	t_flags flags;
+	t_flags *flags = new_flags();
+	char *format = (char *) formatt;
 
 	i = 0;
 	count = 0;
-	va_start(args, format);
+	va_start(args, formatt);
 	while (*format)
 	{
 		if (format[i] == '%' && format[i + 1])
 		{
 			format++;
-			count += ft_putspecifier(*format, args, &flags);
+			ft_parse_spec(&format, flags);
+			count += ft_putspecifier(*format, args, flags);
 			format++;
 		}
 		else if (format[i] == '%' && !*(format + 1))
@@ -64,17 +66,18 @@ int	ft_printf(const char *format, ...)
 }
 
 #include <stdio.h>
+#include <limits.h>
 int main()
 {
-	int  num = 42;
-	t_flags test;
-	char *spec = "-5d";
-	ft_parse_spec(&spec, &test);
-	(void) test;
-	ft_putchar('[');
-	int printed = ft_putnbr_left(num, &test);
-	ft_putchar(']');
+	int  num = INT_MAX;
+	// t_flags test;
+	// char spec[10] = "-5d";
+	// ft_parse_spec(&spec, &test);
+	// (void) test;
+	// ft_putchar('[');
+	int printed = ft_printf("[% -20.11d]", num);
+	// ft_putchar(']');
 	printf("%d\n", printed);
-	printed = printf("[%-5d]", num);
-	printf("%d\n", printed - 2);
+	printed = printf("[% -20.11d]", num);
+	printf("%d\n", printed);
 }
