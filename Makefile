@@ -6,16 +6,24 @@
 #    By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 16:47:35 by amagno-r          #+#    #+#              #
-#    Updated: 2025/05/05 19:23:15 by amagno-r         ###   ########.fr        #
+#    Updated: 2025/05/08 22:09:08 by amagno-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 SRCS = 	ft_printf.c \
-		ft_printf_utils_strs.c \
+		ft_printf_flags.c \
+		ft_printf_utils_address.c \
+		ft_printf_utils.c \
+		ft_printf_utils_flags.c \
+		ft_printf_utils_putchar.c \
+		ft_printf_utils_puthex.c \
 		ft_printf_utils_putnbr.c \
-		ft_printf_utils_address.c
+		ft_printf_utils_putn.c \
+		ft_printf_utils_puts.c \
+		ft_printf_utils_putunbr.c \
+		ft_printf_utils_strs.c	
 
 OBJS = $(SRCS:.c=.o)
 
@@ -24,6 +32,8 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 all: $(NAME)
+
+bonus : all
 
 $(NAME) : $(OBJS)
 	ar rcs $(NAME) $(OBJS)
@@ -38,3 +48,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
