@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/08 22:19:06amagno-r         ###   ########.fr       */
+/*   Created: 2025/05/09 02:11:22 by amagno-r          #+#    #+#             */
+/*   Updated: 2025/05/09 02:17:56 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 
-int	ft_putspecifier(char c, va_list args, t_flags *flags)
+static int	ft_putspecifier(char c, va_list args, t_flags *flags)
 {
 	if (c == 'c')
 		return (ft_putchar_wrapper(va_arg(args, int), flags));
@@ -36,32 +36,40 @@ int	ft_putspecifier(char c, va_list args, t_flags *flags)
 	return (ft_putchar(c));
 }
 
-int	ft_printf(const char *formatt, ...)
+static int	ft_parse_spec(char **format, va_list args)
 {
-	int		i;
 	int		count;
-	va_list	args;
-	t_flags *flags;
-	char *format = (char *) formatt;
+	t_flags	*flags;
 
-	i = 0;
 	count = 0;
-	va_start(args, formatt);
-	while (*format)
+	flags = new_flags();
+	ft_parse_flags(format, flags);
+	count += ft_putspecifier(**format, args, flags);
+	free(flags);
+	return (count);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	int			count;
+	char		*fmt;
+	va_list		args;
+
+	count = 0;
+	fmt = (char *) format;
+	va_start(args, format);
+	while (*fmt)
 	{
-		if (format[i] == '%' && format[i + 1])
+		if (*fmt == '%' && *(fmt + 1))
 		{
-			format++;
-			flags = new_flags();
-			ft_parse_spec(&format, flags);
-			count += ft_putspecifier(*format, args, flags);
-			free(flags);
-			format++;
+			fmt++;
+			count += ft_parse_spec(&fmt, args);
+			fmt++;
 		}
-		else if (format[i] == '%' && !*(format + 1))
+		else if (*fmt == '%' && !*(fmt + 1))
 			break ;
 		else
-			count += ft_putchar(*format++);
+			count += ft_putchar(*fmt++);
 	}
 	va_end(args);
 	return (count);

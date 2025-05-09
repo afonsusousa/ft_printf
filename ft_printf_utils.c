@@ -6,25 +6,25 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:53:11 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 00:37:54 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/09 02:17:25 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_padwith(int len, char pad)
+int	ft_padwith(int len, char pad)
 {
-	int count;
+	int	count;
 
 	count = 0;
-	if(len <= 0)
+	if (len <= 0)
 		return (0);
-	while(len--)
+	while (len--)
 		count += ft_putchar(pad);
 	return (count);
 }
 
-int ft_space_sign(int n, t_flags *flags)
+int	ft_space_sign(int n, t_flags *flags)
 {
 	if (n < 0)
 		return (ft_putchar('-'));
@@ -35,7 +35,7 @@ int ft_space_sign(int n, t_flags *flags)
 	return (0);
 }
 
-int ft_uspace_sign(t_flags *flags)
+int	ft_uspace_sign(t_flags *flags)
 {
 	if (flags->sign)
 		return (ft_putchar('+'));
@@ -44,8 +44,8 @@ int ft_uspace_sign(t_flags *flags)
 	return (0);
 }
 
-int is_spec(char c)
+int	is_spec(char c)
 {
-    return (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' 
-            || c == 'u' || c == 'x' || c == 'X' || c == '%');
+	return (c == 'c' || c == 's' || c == 'p' || c == 'd' 
+		|| c == 'i' || c == 'u' || c == 'x' || c == 'X' || c == '%');
 }
