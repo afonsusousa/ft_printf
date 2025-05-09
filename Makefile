@@ -6,14 +6,13 @@
 #    By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 16:47:35 by amagno-r          #+#    #+#              #
-#    Updated: 2025/05/08 22:28:33 by amagno-r         ###   ########.fr        #
+#    Updated: 2025/05/09 01:17:25 by amagno-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 SRCS = 	ft_printf.c \
-		ft_printf_flags.c \
 		ft_printf_utils_address.c \
 		ft_printf_utils.c \
 		ft_printf_utils_flags.c \
