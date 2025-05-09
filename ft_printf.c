@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 02:11:22 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 02:54:11 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/09 03:19:01 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ static int	ft_parse_spec(char **format, va_list args)
 
 	count = 0;
 	flags = new_flags();
+	if (!flags)
+		return (-1);
 	ft_parse_flags(format, flags);
 	count += ft_putspecifier(**format, args, flags);
 	free(flags);
 	return (count);
 }
 
+//TODO: manage flag allocation failure
 int	ft_printf(const char *format, ...)
 {
 	int			count;
@@ -60,9 +63,8 @@ int	ft_printf(const char *format, ...)
 	va_start(args, format);
 	while (*fmt)
 	{
-		if (*fmt == '%' && *(fmt + 1))
+		if (*fmt == '%' && *(++fmt))
 		{
-			fmt++;
 			count += ft_parse_spec(&fmt, args);
 			fmt++;
 		}
