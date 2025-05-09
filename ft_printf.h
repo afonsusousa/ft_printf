@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:35:12 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 02:18:22 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/09 02:24:33 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		ft_putchar_wrapper(char c, t_flags *flags);
 /* Numeric utilities */
 int		ft_padwith(int len, char pad);
 int		ft_space_sign(int n, t_flags *flags);
-int 	ft_uspace_sign(t_flags *flags);
+int		ft_uspace_sign(t_flags *flags);
 int		is_spec(char c);
 
 /* Integer handling */

@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:53:11 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 02:17:25 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/09 02:24:59 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ int	ft_uspace_sign(t_flags *flags)
 
 int	is_spec(char c)
 {
-	return (c == 'c' || c == 's' || c == 'p' || c == 'd' 
+	return (c == 'c' || c == 's' || c == 'p' || c == 'd'
 		|| c == 'i' || c == 'u' || c == 'x' || c == 'X' || c == '%');
 }

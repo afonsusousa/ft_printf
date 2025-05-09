@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:20:59 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 02:18:53 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/09 02:24:20 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	ft_putnbr_regular(int n, t_flags *flags)
 	p_len = len;
 	if (flags->precision > len)
 		p_len = flags->precision;
-	if (flags->sign || flags->space || n < 0 )
+	if (flags->sign || flags->space || n < 0)
 		p_len++;
 	count += ft_padwith(flags->width - p_len, ' ');
 	count += ft_space_sign(n, flags);
@@ -80,7 +80,7 @@ static int	ft_putnbr_zero(int n, t_flags *flags)
 	len = ft_numlen(n);
 	if (flags->precision != -1)
 		return (ft_putnbr_regular(n, flags));
-	if (flags->sign || flags->space || n < 0 )
+	if (flags->sign || flags->space || n < 0)
 		len++;
 	count += ft_space_sign(n, flags);
 	count += ft_padwith(flags->width - len, '0');
