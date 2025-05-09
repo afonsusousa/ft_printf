@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 02:11:22 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 02:17:56 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/09 02:49:27 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_putspecifier(char c, va_list args, t_flags *flags)
 static int	ft_parse_spec(char **format, va_list args)
 {
 	int		count;
-	t_flags	*flags;
+	t_flags *flags;
 
 	count = 0;
 	flags = new_flags();
@@ -79,16 +79,10 @@ int	ft_printf(const char *format, ...)
 // #include <limits.h>
 // int main()
 // {
-// 	// t_flags test;
-// 	// char spec[10] = "-5d";
-// 	// ft_parse_spec(&spec, &test);
-// 	// (void) test;
-// 	// ft_putchar('[');
-// 	// char *args = "[%-10.5c]";
-// 	int num = 0;
-// 	int printed = ft_printf("[%-5.3i]", num);
-// 	// ft_putchar(']');
+// 	char *args = "[ %#X %#X %#X %#X %#X %#X %#X]";
+// 	// int num = 0;
+// 	int printed = ft_printf(args, INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
 // 	printf("%d\n", printed);
-// 	printed = printf("[%-5.3i]", num);
+// 	printed = printf(args, INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
 // 	printf("%d\n", printed);
 // }
