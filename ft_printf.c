@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:34:40 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/08 22:13:44 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/08 22:19:06amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,20 @@ int	ft_printf(const char *formatt, ...)
 	return (count);
 }
 
-#include <stdio.h>
-#include <limits.h>
-int main()
-{
-	// t_flags test;
-	// char spec[10] = "-5d";
-	// ft_parse_spec(&spec, &test);
-	// (void) test;
-	// ft_putchar('[');
-	char *args = "[%-10.5c]";
-	char str = 'c';
-	int printed = ft_printf(args, str + 256);
-	// ft_putchar(']');
-	printf("%d\n", printed);
-	printed = printf(args, str + 256);
-	printf("%d\n", printed);
-}
+// #include <stdio.h>
+// #include <limits.h>
+// int main()
+// {
+// 	// t_flags test;
+// 	// char spec[10] = "-5d";
+// 	// ft_parse_spec(&spec, &test);
+// 	// (void) test;
+// 	// ft_putchar('[');
+// 	// char *args = "[%-10.5c]";
+// 	int num = 0;
+// 	int printed = ft_printf("[%-5.3i]", num);
+// 	// ft_putchar(']');
+// 	printf("%d\n", printed);
+// 	printed = printf("[%-5.3i]", num);
+// 	printf("%d\n", printed);
+// }

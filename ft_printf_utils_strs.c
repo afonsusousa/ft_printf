@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 20:48:53 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/08 21:33:28 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/09 00:33:16 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,11 @@ int	ft_putstr_left(char *str, t_flags *flags)
 	len = ft_strlen(str);
 	p_len = len;
 	count = 0; 
-	if(!str && flags->precision >= 6)
-	{
-		p_len = 6;
-		count += ft_putnstr("(null)", 6);
-	}
-	if (flags->precision < p_len)
+	if(!str && (flags->precision == -1 || flags->precision >=6))
+		return (ft_putstr_left("(null)", flags));
+	else if (!str)
+		return (ft_putstr_left("", flags));
+	if (flags->precision != -1 && flags->precision < p_len)
 		p_len = flags->precision;
 	count += ft_putnstr(str, p_len);
 	count += ft_padwith(flags->width - p_len, ' ');
@@ -53,13 +52,13 @@ int ft_putstr_right(char *str, t_flags *flags)
 
 	len = ft_strlen(str);
 	count = 0;
-	if(flags->precision < len)
+	if(!str && (flags->precision == -1 || flags->precision >= 6))
+		return (ft_putstr_right("(null)", flags));
+	else if (!str)
+		return (ft_putstr_right("", flags));
+	if(flags->precision != -1 && flags->precision < len)
 		len = flags->precision;
-	if(!str && flags->precision >= 6)
-		len = 6;
 	count += ft_padwith(flags->width - len, ' ');
-	if(!str && flags->precision >= 6)
-		count += ft_putnstr("(null)", len);
 	count += ft_putnstr(str, len);
 	return (count);
 }

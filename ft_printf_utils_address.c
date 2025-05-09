@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:22:15 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/08 21:41:57 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/09 01:10:27 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,42 @@ int	ft_putaddress(unsigned long int n)
 	return (count += ft_putchar((L_STR[n % 16])));
 }
 
+static int	ft_address_len(unsigned long int n)
+{
+	int	len;
+
+	len = 0;
+	if (n == 0)
+		return (1);
+	while (n)
+	{
+		n /= 16;
+		len++;
+	}
+	return (len);
+}
+
 int	ft_address_wrapper(void *p, t_flags *flags)
 {
-	int count;
+	int				count;
+	int				addr_len;
 
 	count = 0;
+	addr_len = ft_address_len((unsigned long int) p) + 2;
+	if (!p && !flags->precision)
+		return (ft_putstr("(nil)"));
 	if (!p && flags->left)
-	{
-		count += ft_putstr("(nil)") + ft_padwith(flags->width - 5, ' ');
-	}
+		return (ft_putstr("(nil)") + ft_padwith(flags->width - 5, ' '));
 	else if (!p)
-	{
-		count += ft_padwith(flags->width - 5, ' ') + ft_putstr("(nil)");
-	}
+		return (ft_padwith(flags->width - 5, ' ') + ft_putstr("(nil)"));
 	if(flags->left && p)
 	{
 		count += ft_putstr("0x") + ft_putaddress((unsigned long int) p);
-		count += ft_padwith(flags->width - 14, ' ');
+		count += ft_padwith(flags->width - addr_len, ' ');
 	}
 	else
 	{
-		count += ft_padwith(flags->width - 14, ' ');
+		count += ft_padwith(flags->width - addr_len, ' ');
 		count += ft_putstr("0x") + ft_putaddress((unsigned long int) p);
 	}
 	return (count);

@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:51:05 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/08 21:00:51 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/09 00:55:25 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	ft_putunbr_left(unsigned int n, t_flags *flags)
 		count += ft_padwith(flags->precision - len, '0');
 	if (!(!flags->precision && !n))
 		count += ft_putunbr(n);
+	else if (flags->width)
+		count += ft_putchar(' ');
 	count += ft_padwith(flags->width - count, ' ');
 	return (count);
 }
@@ -56,10 +58,12 @@ int ft_putunbr_regular(unsigned int n, t_flags *flags)
 	if(flags->sign || flags->space)
 		p_len++;
 	count += ft_padwith(flags->width - p_len, ' ');
-	count += ft_space_sign(n, flags);
+	count += ft_uspace_sign(flags);
 	count += ft_padwith(flags->precision - len, '0');
 	if (!(!flags->precision && !n))	
 		count += ft_putunbr(n);
+	else if (flags->width)
+		count += ft_putchar(' ');
 	return (count);
 }
 
@@ -71,10 +75,10 @@ int	ft_putunbr_zero(unsigned int n, t_flags *flags)
 	count = 0;
 	len = ft_unumlen(n);
 	if(flags->precision != -1)
-		ft_putunbr_regular(n, flags);
+		return (ft_putunbr_regular(n, flags));
 	if(flags->sign || flags->space)
 		len++;
-	count += ft_space_sign(n, flags);
+	count += ft_uspace_sign(flags);
 	count += ft_padwith(flags->width - len, '0');
 	if (!(!flags->precision && !n))
 		count += ft_putunbr(n);
