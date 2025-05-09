@@ -39,19 +39,15 @@ static int	ft_putspecifier(char c, va_list args, t_flags *flags)
 static int	ft_parse_spec(char **format, va_list args)
 {
 	int		count;
-	t_flags	*flags;
+	t_flags	flags;
 
 	count = 0;
-	flags = new_flags();
-	if (!flags)
-		return (-1);
-	ft_parse_flags(format, flags);
-	count += ft_putspecifier(**format, args, flags);
-	free(flags);
+	ft_init_flags(&flags);
+	ft_parse_flags(format, &flags);
+	count += ft_putspecifier(**format, args, &flags);
 	return (count);
 }
 
-//TODO: manage flag allocation failure
 int	ft_printf(const char *format, ...)
 {
 	int			count;

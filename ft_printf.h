@@ -38,7 +38,7 @@ typedef struct s_flags
 int		ft_printf(const char *format, ...);
 
 /* Flags creation and parsing */
-t_flags	*new_flags(void);
+void	ft_init_flags(t_flags *flags);
 void	ft_parse_flags(char **format, t_flags *flags);
 
 /* Character and string handling */
