@@ -6,13 +6,13 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 19:35:18 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 01:43:24 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/10 02:11:48 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr(int n)
+int	ft_putabsnbr(int n)
 {
 	int			count;
 	long int	nb;
@@ -22,7 +22,7 @@ int	ft_putnbr(int n)
 	if (nb < 0)
 		nb = -nb;
 	if (nb > 9)
-		count += ft_putnbr(nb / 10);
+		count += ft_putabsnbr(nb / 10);
 	return (count += ft_putchar(nb % 10 + '0'));
 }
 
