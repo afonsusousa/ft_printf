@@ -25,48 +25,28 @@ static int	ft_strlen(char *str)
 	return (str - start);
 }
 
-static int	ft_putstr_left(char *str, t_flags *flags)
-{
-	int	len;
-	int	p_len;
-	int	count;
-
-	len = ft_strlen(str);
-	p_len = len;
-	count = 0;
-	if (!str && (flags->precision == -1 || flags->precision >= 6))
-		return (ft_putstr_left("(null)", flags));
-	else if (!str)
-		return (ft_putstr_left("", flags));
-	if (flags->precision != -1 && flags->precision < p_len)
-		p_len = flags->precision;
-	if (str)
-		count += ft_putnstr(str, p_len);
-	count += ft_padwith(flags->width - p_len, ' ');
-	return (count);
-}
-
-static int	ft_putstr_right(char *str, t_flags *flags)
-{
-	int	len;
-	int	count;
-
-	len = ft_strlen(str);
-	count = 0;
-	if (!str && (flags->precision == -1 || flags->precision >= 6))
-		return (ft_putstr_right("(null)", flags));
-	else if (!str)
-		return (ft_putstr_right("", flags));
-	if (flags->precision != -1 && flags->precision < len)
-		len = flags->precision;
-	count += ft_padwith(flags->width - len, ' ');
-	count += ft_putnstr(str, len);
-	return (count);
-}
-
 int	ft_putstr_wrapper(char *str, t_flags *flags)
 {
+	int	len;
+	int	count;
+
+	len = ft_strlen(str);
+	count = 0;
+	if (!str && (flags->precision == -1 || flags->precision >= 6))
+		return (ft_putstr_wrapper("(null)", flags));
+	else if (!str)
+		return (ft_putstr_wrapper("", flags));
+	if (flags->precision != -1 && flags->precision < len)
+		len = flags->precision;
 	if (flags->left)
-		return (ft_putstr_left(str, flags));
-	return (ft_putstr_right(str, flags));
+	{
+		count += ft_putnstr(str, len);
+		count += ft_padwith(flags->width - len, ' ');
+	}
+	else
+	{
+		count += ft_padwith(flags->width - len, ' ');
+		count += ft_putnstr(str, len);
+	}
+	return (count);
 }

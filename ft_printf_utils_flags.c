@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-t_flags	new_flags(t_flags *flags)
+void ft_init_flags(t_flags *flags)
 {
 	flags->left = 0;
 	flags->zero = 0;
@@ -21,7 +21,6 @@ t_flags	new_flags(t_flags *flags)
 	flags->space = 0;
 	flags->sign = 0;
 	flags->width = 0;
-	return (*flags);
 }
 
 static int	ft_printf_atoi(char **format)
