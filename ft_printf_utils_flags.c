@@ -6,13 +6,13 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 14:27:12 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 02:22:28 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:29:48 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_init_flags(t_flags *flags)
+void	ft_init_flags(t_flags *flags)
 {
 	flags->left = 0;
 	flags->zero = 0;
