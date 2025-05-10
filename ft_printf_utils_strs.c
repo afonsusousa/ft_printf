@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 20:48:53 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 02:16:12 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:21:08 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static int	ft_strlen(char *str)
 	char	*start;
 
 	start = str;
-	if (!str)
-		return (0);
-	while (*str)
+	while (str && *str)
 		str++;
 	return (str - start);
 }
