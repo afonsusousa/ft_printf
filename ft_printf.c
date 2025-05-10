@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 02:11:22 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 03:19:01 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/10 02:05:37 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	ft_parse_spec(char **format, va_list args)
 	count = 0;
 	ft_init_flags(&flags);
 	ft_parse_flags(format, &flags);
-	count += ft_putspecifier(**format, args, &flags);
+	count += ft_putspecifier(*((*format)++), args, &flags);
 	return (count);
 }
 
@@ -60,10 +60,7 @@ int	ft_printf(const char *format, ...)
 	while (*fmt)
 	{
 		if (*fmt == '%' && *(++fmt))
-		{
 			count += ft_parse_spec(&fmt, args);
-			fmt++;
-		}
 		else if (*fmt == '%' && !*(fmt + 1))
 			break ;
 		else
