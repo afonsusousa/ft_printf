@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 20:48:53 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/10 16:21:08 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:05:26 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	ft_putstr_wrapper(char *str, t_flags *flags)
 	if (flags->left)
 	{
 		count += ft_putnstr(str, len);
-		count += ft_padwith(flags->width - len, ' ');
+		count += ft_pad(flags->width - len, ' ');
 	}
 	else
 	{
-		count += ft_padwith(flags->width - len, ' ');
+		count += ft_pad(flags->width - len, ' ');
 		count += ft_putnstr(str, len);
 	}
 	return (count);

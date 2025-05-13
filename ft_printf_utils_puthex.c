@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:50:13 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/13 20:02:40 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:04:57 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static int	ft_puthex_left(unsigned int n, t_flags *flags, int l_case)
 		count += ft_putchar('0') + ft_putchar(prefix);
 	}
 	if (flags->precision != -1)
-		count += ft_padwith(flags->precision - len, '0');
+		count += ft_pad(flags->precision - len, '0');
 	if (!(!flags->precision && !n))
 		count += ft_puthex(n, l_case);
-	count += ft_padwith(flags->width - count, ' ');
+	count += ft_pad(flags->width - count, ' ');
 	return (count);
 }
 
@@ -60,13 +60,13 @@ static int	ft_puthex_regular(int n, t_flags *flags, int l_case)
 	if (flags->precision > len)
 		p_len = flags->precision;
 	if (flags->width > p_len)
-		count += ft_padwith(flags->width - p_len - ((flags->hash && n) * 2), ' ');
+		count += ft_pad(flags->width - p_len - ((flags->hash && n) * 2), ' ');
 	if (flags->hash && n)
 	{
 		count += ft_putchar('0');
 		count += ft_putchar(l_case * 'x' + !l_case * 'X');
 	}
-	count += ft_padwith(flags->precision - len, '0');
+	count += ft_pad(flags->precision - len, '0');
 	if (!(!flags->precision && !n))
 		count += ft_puthex(n, l_case);
 	else if (flags->width)
@@ -90,7 +90,7 @@ static int	ft_puthex_zero(unsigned int n, t_flags *flags, int l_case)
 		count += ft_putchar('0');
 		count += ft_putchar(l_case * 'x' + !l_case * 'X');
 	}
-	count += ft_padwith(flags->width - len - count, '0');
+	count += ft_pad(flags->width - len - count, '0');
 	if (!(!flags->precision && !n))
 		count += ft_puthex(n, l_case);
 	else if (flags->width)

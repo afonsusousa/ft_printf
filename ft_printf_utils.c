@@ -6,13 +6,13 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:53:11 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 02:24:59 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:05:14 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_padwith(int len, char pad)
+int	ft_pad(int len, char pad)
 {
 	int	count;
 

@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:22:15 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/09 02:12:13 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:07:02 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ int	ft_address_wrapper(void *p, t_flags *flags)
 	if (!p && !flags->precision)
 		return (ft_putstr("(nil)"));
 	if (!p && flags->left)
-		return (ft_putstr("(nil)") + ft_padwith(flags->width - 5, ' '));
+		return (ft_putstr("(nil)") + ft_pad(flags->width - 5, ' '));
 	else if (!p)
-		return (ft_padwith(flags->width - 5, ' ') + ft_putstr("(nil)"));
+		return (ft_pad(flags->width - 5, ' ') + ft_putstr("(nil)"));
 	if (flags->left && p)
 	{
 		count += ft_putstr("0x") + ft_putaddress((unsigned long int) p);
-		count += ft_padwith(flags->width - addr_len, ' ');
+		count += ft_pad(flags->width - addr_len, ' ');
 	}
 	else
 	{
-		count += ft_padwith(flags->width - addr_len, ' ');
+		count += ft_pad(flags->width - addr_len, ' ');
 		count += ft_putstr("0x") + ft_putaddress((unsigned long int) p);
 	}
 	return (count);

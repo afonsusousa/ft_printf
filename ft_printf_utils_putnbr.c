@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:20:59 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/10 02:13:00 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:06:20 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ static int	ft_putnbr_left(int n, t_flags *flags)
 	count = ft_space_sign(n, flags);
 	len = ft_numlen(n);
 	if (flags->precision != -1)
-		count += ft_padwith(flags->precision - len, '0');
+		count += ft_pad(flags->precision - len, '0');
 	if (!(!flags->precision && !n))
 		count += ft_putabsnbr(n);
 	else if (flags->width)
 		count += ft_putchar(' ');
-	count += ft_padwith(flags->width - count, ' ');
+	count += ft_pad(flags->width - count, ' ');
 	return (count);
 }
 
@@ -61,9 +61,9 @@ static int	ft_putnbr_regular(int n, t_flags *flags)
 		p_len = flags->precision;
 	if (flags->sign || flags->space || n < 0)
 		p_len++;
-	count += ft_padwith(flags->width - p_len, ' ');
+	count += ft_pad(flags->width - p_len, ' ');
 	count += ft_space_sign(n, flags);
-	count += ft_padwith(flags->precision - len, '0');
+	count += ft_pad(flags->precision - len, '0');
 	if (!(!flags->precision && !n))
 		count += ft_putabsnbr(n);
 	else if (flags->width)
@@ -83,7 +83,7 @@ static int	ft_putnbr_zero(int n, t_flags *flags)
 	if (flags->sign || flags->space || n < 0)
 		len++;
 	count += ft_space_sign(n, flags);
-	count += ft_padwith(flags->width - len, '0');
+	count += ft_pad(flags->width - len, '0');
 	if (!(!flags->precision && !n))
 		count += ft_putabsnbr(n);
 	return (count);
