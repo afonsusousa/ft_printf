@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:51:05 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/13 20:05:51 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/13 21:21:59 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	ft_putunbr_regular(unsigned int n, t_flags *flags)
 	if (flags->sign || flags->space)
 		p_len++;
 	count += ft_pad(flags->width - p_len, ' ');
-	count += ft_uspace_sign(flags);
+	count += ft_space_sign((long int) n, flags);
 	count += ft_pad(flags->precision - len, '0');
 	if (!(!flags->precision && !n))
 		count += ft_putunbr(n);
@@ -78,7 +78,7 @@ static int	ft_putunbr_zero(unsigned int n, t_flags *flags)
 		return (ft_putunbr_regular(n, flags));
 	if (flags->sign || flags->space)
 		len++;
-	count += ft_uspace_sign(flags);
+	count += ft_space_sign((long int) n, flags);
 	count += ft_pad(flags->width - len, '0');
 	if (!(!flags->precision && !n))
 		count += ft_putunbr(n);

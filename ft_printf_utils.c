@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:53:11 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/13 20:05:14 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/13 21:20:48 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,10 @@ int	ft_pad(int len, char pad)
 	return (count);
 }
 
-int	ft_space_sign(int n, t_flags *flags)
+int	ft_space_sign(long int n, t_flags *flags)
 {
 	if (n < 0)
 		return (ft_putchar('-'));
-	if (flags->sign)
-		return (ft_putchar('+'));
-	if (flags->space)
-		return (ft_putchar(' '));
-	return (0);
-}
-
-int	ft_uspace_sign(t_flags *flags)
-{
 	if (flags->sign)
 		return (ft_putchar('+'));
 	if (flags->space)
