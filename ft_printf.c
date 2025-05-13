@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 02:11:22 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/13 20:09:06 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:13:10 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	ft_printf(const char *format, ...)
 	count = 0;
 	fmt = (char *) format;
 	va_start(args, format);
+	if (!format)
+		return (-1);
 	while (*fmt)
 	{
 		if (*fmt == '%' && *(++fmt))
