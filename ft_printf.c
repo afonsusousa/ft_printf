@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 02:11:22 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/13 19:56:59 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:09:06 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-#include <stdio.h>
-#include <limits.h>
-int main()
-{
-	char *args = ">------------<%030x>------------<";
-	int num = 123;
-	int printed = ft_printf(args, num);
-	printf("%d\n", printed);
-	printed = printf(args, num);
-	printf("%d\n", printed);
-}
+// #include <stdio.h>
+// #include <limits.h>
+// int main()
+// {
+// 	char *args = ">------------<%030x>------------<";
+// 	int num = 123;
+// 	int printed = ft_printf(args, num);
+// 	printf("%d\n", printed);
+// 	printed = printf(args, num);
+// 	printf("%d\n", printed);
+// }
