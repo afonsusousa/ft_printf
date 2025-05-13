@@ -70,16 +70,14 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-// #include <stdio.h>
-// #include <limits.h>
-// int main()
-// {
-// 	char *args = "[ %#X %#X %#X %#X %#X %#X %#X]";
-// 	// int num = 0;
-// 	int printed = ft_printf(args, INT_MAX, 
-// 					INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
-// 	printf("%d\n", printed);
-// 	printed = printf(args, INT_MAX,
-//					INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
-// 	printf("%d\n", printed);
-// }
+#include <stdio.h>
+#include <limits.h>
+int main()
+{
+	char *args = ">------------<%#20.2x>------------<";
+	int num = 0;
+	int printed = ft_printf(args, num);
+	printf("%d\n", printed);
+	printed = printf(args, num);
+	printf("%d\n", printed);
+}
