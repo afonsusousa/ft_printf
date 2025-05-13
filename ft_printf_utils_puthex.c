@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:50:13 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/13 20:01:33 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:02:40 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	ft_puthex_regular(int n, t_flags *flags, int l_case)
 	if (flags->precision > len)
 		p_len = flags->precision;
 	if (flags->width > p_len)
-		count += ft_padwith(flags->width - p_len - (flags->hash && n * 2), ' ');
+		count += ft_padwith(flags->width - p_len - ((flags->hash && n) * 2), ' ');
 	if (flags->hash && n)
 	{
 		count += ft_putchar('0');
