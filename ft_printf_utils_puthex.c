@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:50:13 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/13 19:41:56 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:47:15 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_puthex_left(unsigned int n, t_flags *flags, int l_case)
 		count += ft_putchar('0') + ft_putchar(prefix);
 	}
 	if (flags->precision != -1)
-		count += ft_padwith(flags->precision - len - (flags->hash * 2), '0');
+		count += ft_padwith(flags->precision - len, '0');
 	if (!(!flags->precision && !n))
 		count += ft_puthex(n, l_case);
 	count += ft_padwith(flags->width - count, ' ');
