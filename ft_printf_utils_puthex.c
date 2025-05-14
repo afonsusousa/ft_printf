@@ -6,7 +6,7 @@
 /*   By: amagno-r <amagno-r@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:50:13 by amagno-r          #+#    #+#             */
-/*   Updated: 2025/05/13 20:04:57 by amagno-r         ###   ########.fr       */
+/*   Updated: 2025/05/14 20:21:07 by amagno-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ static int	ft_puthex_zero(unsigned int n, t_flags *flags, int l_case)
 	len = ft_hexlen(n);
 	if (flags->precision != -1)
 		return (ft_puthex_regular(n, flags, l_case));
-	if (flags->sign || flags->space)
-		len++;
 	if (flags->hash && n)
 	{
 		count += ft_putchar('0');
